@@ -10,10 +10,8 @@ margin-right: 40px;
 color:black;
 background-color:#e7ebf2;
 position: relative;
-  &:hover {
-    background-color: #e7ebf2;
-  }
-  &:after {
+  
+  ${props => props.propFor === "user" ? `&:after {
     content: "";
     position:absolute;
     margin-top:-6px;
@@ -24,7 +22,19 @@ position: relative;
     transform:rotate(-45deg);
     right: -15px; 
     top: 10px;
-  }
+  }`:
+  `&:before {
+    content: "";
+    position:absolute;
+    margin-top:-6px;
+    margin-left:-5px;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #e7ebf2;
+    transform:rotate(45deg);
+    left: -10px; 
+    top: 10px;
+  }`}
   ${props =>
     props.color === "red" &&
     css`

@@ -4,14 +4,14 @@ import { BubbleProps } from "./props";
 
 const Bubble: React.FC<BubbleProps> = ({
   user,
-//   onClick,
+  propFor,
 //   color,
 //   children,
 //   disabled,
 //   outline
 }) => (
   <BubbleWrapper
-    // onClick={onClick}
+    propFor={propFor}
     // color={color}
     // disabled={disabled}
     // outline={outline}

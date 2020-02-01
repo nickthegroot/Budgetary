@@ -1,6 +1,6 @@
 export interface BubbleProps {
     user?: string;
-    // color?: string;
+    propFor?: string;
     // type?: any;
     // outline?: boolean;
     // onClick?: () => void;
