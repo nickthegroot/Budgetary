@@ -1,8 +1,7 @@
 import createState from 'react-copy-write'
 
 export interface AuthContext {
-    serverAccessToken?: string;
-    plaidAccessToken?: string;
+    accessToken?: string,
 }
 
 export const { Consumer, Provider, mutate } = createState<AuthContext>({})
