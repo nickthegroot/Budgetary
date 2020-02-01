@@ -16,7 +16,7 @@ const RedButton = styled.button({
 
 export const responseButton = () => (
     <Button type='submit' color='red' disabled={false}>
-        response
+        How I am doing
     </Button>
 );
 
