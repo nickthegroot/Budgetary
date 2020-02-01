@@ -1,0 +1,36 @@
+{
+  "name": "hacksc-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start:node": "node --inspect=5858 -r ts-node/register -r dotenv/config ./src/server.ts",
+    "start": "nodemon",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
+    "express-validator": "^6.3.1",
+    "jwks-rsa": "^1.6.2",
+    "moment": "^2.24.0",
+    "nodemon": "^2.0.2",
+    "plaid": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/express-jwt": "^0.0.42",
+    "@types/node": "^13.7.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "exec": "yarn start:node",
+    "ext": "ts"
+  },
+  "proxy": "http://localhost:4090"
+}
