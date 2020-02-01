@@ -7,13 +7,12 @@ import Auth0Client from "@auth0/auth0-spa-js/dist/typings/Auth0Client";
 interface AuthContext {
   isAuthenticated: boolean;
   user?: any;
-  token?: string;
   loading: boolean;
   handleRedirectCallback: () => void;
-  getIdTokenClaims: (options: getIdTokenClaimsOptions) => Promise<IdToken>;
-  loginWithRedirect: (options: RedirectLoginOptions) => Promise<void>;
-  getTokenSilently: (options: GetTokenSilentlyOptions) => Promise<any>;
-  getTokenWithPopup: (options: GetTokenWithPopupOptions) => Promise<string>;
+  getIdTokenClaims: (options?: getIdTokenClaimsOptions) => Promise<IdToken>;
+  loginWithRedirect: (options?: RedirectLoginOptions) => Promise<void>;
+  getTokenSilently: (options?: GetTokenSilentlyOptions) => Promise<any>;
+  getTokenWithPopup: (options?: GetTokenWithPopupOptions) => Promise<string>;
   logout: (options: LogoutOptions) => void;
 }
 
@@ -27,18 +26,12 @@ export const Auth0Provider = ({
 }: ProviderContext) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState();
-  const [token, setToken] = useState<string>();
   const [auth0Client, setAuth0] = useState<Auth0Client>();
   const [loading, setLoading] = useState(true);
 
   const loginUser = async (user: any, authClient = auth0Client) => {
     setIsAuthenticated(true)
-    const token = await authClient!.getTokenSilently();
-    setToken(token);
     setUser(user);
-
-    // identify user
-    
   }
 
   useEffect(() => {
@@ -79,11 +72,10 @@ export const Auth0Provider = ({
         user,
         loading,
         handleRedirectCallback,
-        token,
-        getIdTokenClaims: (options: getIdTokenClaimsOptions) => auth0Client!.getIdTokenClaims(options),
-        loginWithRedirect: (options: RedirectLoginOptions) => auth0Client!.loginWithRedirect(options),
-        getTokenSilently: (options: GetTokenSilentlyOptions) => auth0Client!.getTokenSilently(options),
-        getTokenWithPopup: (options: GetTokenWithPopupOptions) => auth0Client!.getTokenWithPopup(options),
+        getIdTokenClaims: (options?: getIdTokenClaimsOptions) => auth0Client!.getIdTokenClaims(options),
+        loginWithRedirect: (options?: RedirectLoginOptions) => auth0Client!.loginWithRedirect(options),
+        getTokenSilently: (options?: GetTokenSilentlyOptions) => auth0Client!.getTokenSilently(options),
+        getTokenWithPopup: (options?: GetTokenWithPopupOptions) => auth0Client!.getTokenWithPopup(options),
         logout: (options: LogoutOptions) => auth0Client!.logout(options)
     }}
     >

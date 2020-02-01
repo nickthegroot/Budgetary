@@ -39,39 +39,20 @@ app.listen(PORT, () => {
 })
 
 app.post('/plaid/public_token', validate([body('public_token').isString()]), (req: any, res) => {
-    console.log(req.user)
     const { public_token } = req.body;
 
-    plaidClient.exchangePublicToken(public_token, (error, { access_token, item_id }) => {
+    plaidClient.exchangePublicToken(public_token, (error, { access_token }) => {
         if (error) return res.status(500).json(error)
 
-        // db.collection('users').insertOne({ id: req.user, plaidToken: access_token })
-        return res.sendStatus(204)
+        db.collection('users').insertOne({ id: req.user.sub, plaidToken: access_token })
+        return res.sendStatus(200)
     })
 })
-
-// app.get('/transactions', (req, res) => {
-//     const startDate = moment().subtract(30, "days").format("YYYY-MM-DD")
-//     const endDate = moment().format("YYYY-MM-DD")
-
-//     plaidClient.getTransactions(
-//         ACCESS_TOKEN,
-//         startDate,
-//         endDate,
-//         {
-//             count: 250,
-//             offset: 0
-//         },
-//         function(error, transactionsResponse) {
-//             res.json({ transactions: transactionsResponse });
-//         }
-//     )
-// })
 
 app.use((err, req, res, next) => {
     switch (err.name) {
         case 'UnauthorizedError':
-            return res.status(401).send('Authorization is required.');
+            return res.sendStatus(401);
         default:
             console.error(err.stack)
             return res.status(500).send(err.name)
