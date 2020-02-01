@@ -5,7 +5,7 @@ import ChatBubble from "../components/ChatBubble";
 export const chatBubble = () => {
     return (<ChatBubble user={text('message', 'Hello!')} />)
 }
- 
+
 export default {
   title: "Chat Components",
   decorators: [withKnobs],
