@@ -16,6 +16,7 @@
     "typescript": "~3.7.2"
   },
   "devDependencies": {
+    "@storybook/addon-knobs": "^5.3.9",
     "@storybook/preset-create-react-app": "^1.5.2",
     "@storybook/react": "^5.3.9"
   },
