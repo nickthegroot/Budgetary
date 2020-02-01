@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from '../components/lib/Button'
 import {withKnobs, text, boolean, number} from "@storybook/addon-knobs";
+import Avatar from 'react-avatar';
 
 export default {
     title: "Storybook Knobs",
@@ -19,6 +20,10 @@ export const responseButton = () => (
         How I am doing
     </Button>
 );
+
+export const avatar = () => (
+  <Avatar name="Marcus Rashford" size="150" round={true} />
+)
 
 // Knobs for React props
 export const withAButton = () => (
