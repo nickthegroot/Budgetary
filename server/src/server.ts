@@ -1,18 +1,20 @@
 import express from 'express'
+import cors from 'cors'
 import { body } from 'express-validator';
 import validate from './utils/validate';
-import jwtCheck from './utils/auth';
+// import jwtCheck from './utils/auth';
 import { receivePublicToken, getTransactions } from './controllers/plaid_controller';
 
 const app = express();
 const PORT = process.env.PORT ?? 4090
 
 app.use(express.json())
-app.use(jwtCheck)
+app.use(cors())
+// app.use(jwtCheck)
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
 app.post('/plaid/public_token', validate([body('public_token').isString()]), receivePublicToken)
-app.get('/transactions', validate([body('access_token').isString()]), getTransactions)
+app.get('/transactions', getTransactions)
 
 app.use((err, req, res, next) => {
     switch (err.name) {
