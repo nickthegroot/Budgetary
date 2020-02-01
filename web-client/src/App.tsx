@@ -1,14 +1,12 @@
-import React from 'react';
-import './App.css';
-import ChatBubble from "./components/Bubble/ChatBubble";
+import React, { FC } from 'react';
+import ThemeProvider from './theme';
+import Router from './Router';
 
-const App = () => {
+const App: FC = () => {
   return (
-    <div className="App">
-      <div className="home-container">
-        <ChatBubble/>
-      </div>
-    </div>
+    <ThemeProvider>
+        <Router />
+    </ThemeProvider>
   );
 }
 

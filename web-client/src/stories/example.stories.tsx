@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Button from '../components/lib/Button'
+import Button from '../components/button'
 import {withKnobs, text, boolean, number} from "@storybook/addon-knobs";
 
 export default {
@@ -16,7 +16,7 @@ const RedButton = styled.button({
 
 export const responseButton = () => (
     <Button type='submit' color='red' disabled={false}>
-        response
+        How I am doing
     </Button>
 );
 

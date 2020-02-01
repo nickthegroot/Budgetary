@@ -26,12 +26,12 @@ const ButtonWrapper = styled.button<ButtonProps>`
       a {
         color: white;
       }
-      background-color: #8b0000 ;
-      border: 1px solid #6713c4;
-      box-shadow: 0 2px 0 #6713c4, 1px 3px 6px #6713c4;
+      background-color: rgb(255, 131, 121) ;
+      border: .5px solid black;
+      border-radius: 8px;
       color: white;
       &:hover {
-        background-color: #6713c4;
+        background-color: rgb(255, 131, 80);
       }
     `}
 `;
