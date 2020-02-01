@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { Redirect, Route } from 'react-router-dom'
-import { Consumer as AuthConsumer } from '../context/auth';
-import { getServerAccess } from '../context/selectors/auth'
+import { useAuth0 } from '../hooks/auth0-hook';
 
 export interface Props {
     path: string | string[];
@@ -10,28 +9,25 @@ export interface Props {
 }
 
 const AuthenticatedRoute: FC<Props> = ({ component: Comp, ...props }) => {
+    const { loading, isAuthenticated } = useAuth0()
+    if (loading) return <div />
+
     return (
-        <AuthConsumer select={[getServerAccess]}>
-            {(serverToken?: string) => {
-                return (
-                    <Route
-                        {...props}
-                        component={(props: any) => (
-                            serverToken ? (
-                                <Comp {...props} />
-                            ) : (
-                                <Redirect
-                                    to={{
-                                        pathname: '/login',
-                                        state: { from: props.location },
-                                    }}
-                                />
-                            )
-                        )}
+        <Route
+            {...props}
+            component={(props: any) => (
+                isAuthenticated ? (
+                    <Comp {...props} />
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: '/login',
+                            state: { from: props.location },
+                        }}
                     />
-                );
-            }}
-        </AuthConsumer>
+                )
+            )}
+        />
     );
 };
 

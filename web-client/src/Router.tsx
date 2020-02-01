@@ -12,7 +12,7 @@ const AppRoutes: FC = () => (
     <Router>
         <Switch>
             <Route path="/login" exact component={LoginPage} />
-            <AuthenticatedRoute path="/" component={ChatPage} />
+            <AuthenticatedRoute path="/" exact component={ChatPage} />
         </Switch>
     </Router>
 )

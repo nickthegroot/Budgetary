@@ -4,9 +4,9 @@ import ChatBubble from "../components/Bubble/ChatBubble";
 
 export const chatBubble = () => {
     return (<ChatBubble
-      user={text('message', 'Hello!')}
-      propFor={text('propfor', 'user')}
-      />)
+    user={text('message', 'Hello!')}
+    propFor={text('propfor', 'user')}
+    />)
 }
 
 export default {
