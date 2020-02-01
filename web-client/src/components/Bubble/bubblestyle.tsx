@@ -49,6 +49,14 @@ position: relative;
         background-color: #6713c4;
       }
     `}
-`;
+
+animation: myfirst 2s;
+animation-direction: alternate-reverse;
+}
+@keyframes myfirst {
+0%   { left: 0px; top: 0px;}
+100%  { left: 0px; top: 500px;}
+
+}`;
 
 export { BubbleWrapper };
