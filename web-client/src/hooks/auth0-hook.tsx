@@ -43,24 +43,23 @@ export const Auth0Provider = ({
 
   useEffect(() => {
     const initAuth0 = async () => {
-      const auth0FromHook = await createAuth0Client(initOptions as Auth0ClientOptions);
-      setAuth0(auth0FromHook);
+    const auth0FromHook = await createAuth0Client(initOptions as Auth0ClientOptions);
+    setAuth0(auth0FromHook);
 
-      if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
+    if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
         await auth0FromHook.handleRedirectCallback();
         window.history.replaceState({}, document.title, window.location.pathname);
-      }
+    }
 
-      const isAuthenticated = await auth0FromHook.isAuthenticated();
+    const isAuthenticated = await auth0FromHook.isAuthenticated();
+    setIsAuthenticated(isAuthenticated);
 
-      setIsAuthenticated(isAuthenticated);
-
-      if (isAuthenticated) {
+    if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
         loginUser(user, auth0FromHook);
-      }
+    }
 
-      setLoading(false);
+    setLoading(false);
     };
     initAuth0();
     // eslint-disable-next-line
@@ -75,7 +74,7 @@ export const Auth0Provider = ({
   };
   return (
     <Auth0Context.Provider
-      value={{
+    value={{
         isAuthenticated,
         user,
         loading,
@@ -86,9 +85,9 @@ export const Auth0Provider = ({
         getTokenSilently: (options: GetTokenSilentlyOptions) => auth0Client!.getTokenSilently(options),
         getTokenWithPopup: (options: GetTokenWithPopupOptions) => auth0Client!.getTokenWithPopup(options),
         logout: (options: LogoutOptions) => auth0Client!.logout(options)
-      }}
+    }}
     >
-      {children}
+    {children}
     </Auth0Context.Provider>
   );
 };

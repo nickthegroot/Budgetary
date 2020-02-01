@@ -14,7 +14,7 @@ const ChatPage: FC = () => {
             onExit={() => undefined}
             onSuccess={() => undefined}>
             Connect Your Bank
-      </PlaidLink>
+    </PlaidLink>
     )
 }
 

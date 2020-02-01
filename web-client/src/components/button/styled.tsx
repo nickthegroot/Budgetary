@@ -23,16 +23,16 @@ const ButtonWrapper = styled.button<ButtonProps>`
   ${props =>
     props.color === "red" &&
     css`
-      a {
+    a {
         color: white;
-      }
-      background-color: #8b0000 ;
-      border: 1px solid #6713c4;
-      box-shadow: 0 2px 0 #6713c4, 1px 3px 6px #6713c4;
-      color: white;
-      &:hover {
+    }
+    background-color: #8b0000 ;
+    border: 1px solid #6713c4;
+    box-shadow: 0 2px 0 #6713c4, 1px 3px 6px #6713c4;
+    color: white;
+    &:hover {
         background-color: #6713c4;
-      }
+    }
     `}
 `;
 
