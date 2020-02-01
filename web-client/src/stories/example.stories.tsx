@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Button from '../components/lib/Button'
+import Button from '../components/button'
 import {withKnobs, text, boolean, number} from "@storybook/addon-knobs";
 
 export default {
