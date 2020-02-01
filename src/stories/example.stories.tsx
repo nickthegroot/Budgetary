@@ -1,4 +1,5 @@
 import React from "react";
+import styled from 'styled-components';
 import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
  
 export default {
@@ -8,11 +9,15 @@ export default {
 // Add the `withKnobs` decorator to add knobs support to your stories.
 // You can also configure `withKnobs` as a global decorator.
  
+const RedButton = styled.button({
+  backgroundColor: 'red',
+})
+
 // Knobs for React props
 export const withAButton = () => (
-  <button disabled={boolean("Disabled", false)}>
+  <RedButton disabled={boolean("Disabled", false)}>
     {text("Label", "Hello Storybook")}
-  </button>
+  </RedButton>
 );
  
 // Knobs as dynamic variables.
