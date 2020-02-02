@@ -53,9 +53,6 @@ position: relative;
         background-color: #6713c4;
     }
     `}
-
-
-
 }`;
 
 export { BubbleWrapper };
