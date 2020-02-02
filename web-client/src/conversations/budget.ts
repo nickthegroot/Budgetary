@@ -69,7 +69,7 @@ const messages: ConversationFlow = {
         next: 125,
     },
     125: {
-        message: "Here's the budget I came up with",
+        message: "Here's the budget I came up with (hover over a sector to get the category).",
         action: 'SHOW_BUDGET',
         next: 126
     },

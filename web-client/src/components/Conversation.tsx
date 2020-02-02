@@ -1,10 +1,12 @@
 import React, { FC, useState, useEffect } from 'react'
 import PlaidLink from 'react-plaid-link'
+import PieChart from 'react-minimal-pie-chart'
 import Flow from '../conversations'
 import { useServer } from '../hooks/server'
 import Bubble from './Bubble/ChatBubble'
 import Button from './button'
 import ConvoInput from './ConvoInput'
+import generateRandomColor from '../util/generateRandomColor'
 
 const PLAID_ENV = process.env.REACT_APP_PLAID_ENV!
 const PLAID_PUBLIC_KEY = process.env.REACT_APP_PLAID_PUBLIC_KEY!
@@ -21,7 +23,7 @@ const Conversation: FC = () => {
     const [responses, setResponses] = useState<React.ReactNode[]>([])
     const [messageHistory, setMessageHistory] = useState<number[]>([])
     const [responseHistory, setResponseHistory] = useState<{ [ key: string ]: string | number }>({})
-    const [budget, setBudget] = useState<Object>()
+    const [budget, setBudget] = useState<any>()
     
     // const addMessage = async (id = messageHistory[-1], prevMessages = messages, prevMessageHistory = messageHistory, user = false) => {
     const addMessage = async (id: number) => {
@@ -56,10 +58,31 @@ const Conversation: FC = () => {
                     setBudget(budgetResposne)
                     break;
                     case 'SHOW_BUDGET':
-                        // TODO Pretty format budget
+                        let pieData: { title: string, value: number, color: string }[] = []
+                        for (let habit in budget) {
+                            if (budget[habit] > 0) {
+                                pieData.push({
+                                    title: habit,
+                                    value: budget[habit],
+                                    color: generateRandomColor(),
+                                })
+                            }
+                        }
+
                         addedMessages.push({
                             user: false,
-                            message: JSON.stringify(budget)
+                            message: (
+                            <PieChart
+                                data={pieData}
+                                animate
+                            />)
+                        })
+
+                        addedMessages.push({
+                            user: false,
+                            message: (
+                                pieData.map(data => <p><span style={{ fontWeight: 'bold', color: data.color }}>{data.title}</span>: ${data.value.toFixed(2)}</p>)
+                            )
                         })
                         break;
                     default:
@@ -92,7 +115,6 @@ const Conversation: FC = () => {
                     continue
                 }
                 
-                // TODO: add input component
                 if (response.input) {
                     const handleSubmit = (value: string | number) => {
                         let newResponseHistory = responseHistory

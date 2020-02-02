@@ -77,7 +77,7 @@ app.post('/budget/recommend', validate([body('goal').isNumeric()]), async (req: 
     }
     
     let unaccounted: number = goal;
-    let monthly_budget = { goal }
+    let monthly_budget = { Goal: goal }
     let updated_habit_weights = {...HABIT_WEIGHTS}
     while (unaccounted > 0) {
         let totalWeights = 0
