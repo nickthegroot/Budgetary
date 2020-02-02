@@ -163,7 +163,7 @@ const Conversation: FC = () => {
     }
     
     useEffect(() => {
-        setTimeout(() => addMessage(nextMessage), 200)
+        setTimeout(() => addMessage(nextMessage), 1000)
     }, [nextMessage])
 
     return (
