@@ -1,6 +1,5 @@
-import React from 'react'
-import { useAuth0 } from './auth0-hook'
 import axios from 'axios';
+import { useAuth0 } from './auth0-hook'
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL ?? 'http://localhost:4090'
 

@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import './App.css'
 import ThemeProvider from './theme';
 import Router from './Router';
 import { Auth0Provider } from './hooks/auth0-hook';
