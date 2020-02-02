@@ -12,7 +12,7 @@ const PLAID_ENV = process.env.REACT_APP_PLAID_ENV!
 const PLAID_PUBLIC_KEY = process.env.REACT_APP_PLAID_PUBLIC_KEY!
 
 const Conversation: FC = () => {
-    const { savePlaidToken, getBudgetRecommendations } = useServer();
+    const { savePlaidToken, checkPlaidToken, getBudgetRecommendations } = useServer();
     const handlePlaidSuccess = (publicToken: string) => {
         savePlaidToken(publicToken)
         setNextMessage(113)
@@ -150,9 +150,8 @@ const Conversation: FC = () => {
         for (let flag in message.flags) {
             switch (flag) {
                 case 'BANK_NOT_LINKED':
-                    // TODO: add endpoint to determine if linked
-                    if (false) {
-                        // upcomingMessage = message.flags[flag].next
+                    if (!(await checkPlaidToken())) {
+                        upcomingMessage = message.flags[flag].next
                     }
                     break;
             }
