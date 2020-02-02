@@ -6,16 +6,19 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL ?? 'http://localhost:4090'
 
 export const useServer = () => {
     const { getTokenSilently } = useAuth0();
-    
-    const savePlaidToken = async (plaidToken: string) => {
+    const getAuthHeader = async () => {
         const serverToken = await getTokenSilently()
         if (!serverToken) throw new Error('Unauthenticated')
         const requestHeader = { headers: { Authorization: `Bearer ${serverToken!}` } }
 
-        return axios.post(`${SERVER_URL}/plaid/public_token`, { public_token: plaidToken }, requestHeader)
+        return requestHeader;
     }
+    
+    const savePlaidToken = async (plaidToken: string) => axios.post(`${SERVER_URL}/plaid/public_token`, { public_token: plaidToken }, await getAuthHeader())
+    const getBudgetRecommendations = async (goal: number) => axios.post(`${SERVER_URL}/budget/recommend`, { goal }, await getAuthHeader())
 
     return {
-        savePlaidToken
+        savePlaidToken,
+        getBudgetRecommendations
     }
 }
