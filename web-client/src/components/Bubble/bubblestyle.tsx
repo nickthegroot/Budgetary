@@ -38,16 +38,16 @@ position: relative;
   ${props =>
     props.color === "red" &&
     css`
-      a {
+    a {
         color: white;
-      }
-      background-color: white ;
-      border: 1px solid #6713c4;
-      box-shadow: 0 2px 0 #6713c4, 1px 3px 6px #6713c4;
-      color: white;
-      &:hover {
+    }
+    background-color: white ;
+    border: 1px solid #6713c4;
+    box-shadow: 0 2px 0 #6713c4, 1px 3px 6px #6713c4;
+    color: white;
+    &:hover {
         background-color: #6713c4;
-      }
+    }
     `}
 
 animation: myfirst 2s;
