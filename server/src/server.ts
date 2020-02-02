@@ -51,6 +51,13 @@ app.post('/plaid/public_token', validate([body('public_token').isString()]), asy
     return res.sendStatus(200)
 })
 
+app.get('/plaid/public_token/exists', async (req: any, res) => {
+    const user = await usersDb.findOne({ id: req.user.sub })
+    if (user) return res.sendStatus(200)
+    else return res.sendStatus(404)
+})
+
+
 app.post('/budget/recommend', validate([body('goal').isNumeric()]), async (req: any, res) => {
     const { goal } = req.body;
     const plaidToken = await getPlaidAccessToken(req.user.sub)
@@ -77,7 +84,7 @@ app.post('/budget/recommend', validate([body('goal').isNumeric()]), async (req: 
     }
     
     let unaccounted: number = goal;
-    let monthly_budget = { goal }
+    let monthly_budget = { Goal: goal }
     let updated_habit_weights = {...HABIT_WEIGHTS}
     while (unaccounted > 0) {
         let totalWeights = 0
