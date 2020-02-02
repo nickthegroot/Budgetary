@@ -4,7 +4,7 @@ import Flow from '../conversations'
 import { useServer } from '../hooks/server'
 import Bubble from './Bubble/ChatBubble'
 import Button from './button'
-import { ConversationMessage } from '../conversations/types'
+import ConvoInput from './ConvoInput'
 
 const PLAID_ENV = process.env.REACT_APP_PLAID_ENV!
 const PLAID_PUBLIC_KEY = process.env.REACT_APP_PLAID_PUBLIC_KEY!
@@ -77,7 +77,6 @@ const Conversation: FC = () => {
                 if (response.message) {
                     const handleClick = () => {
                         setResponses([])
-
                         setMessages([
                             ...currentMessages, 
                             {
@@ -95,6 +94,29 @@ const Conversation: FC = () => {
                 
                 // TODO: add input component
                 if (response.input) {
+                    const handleSubmit = (value: string | number) => {
+                        let newResponseHistory = responseHistory
+                        newResponseHistory[response.id!] = value
+
+                        setResponseHistory(newResponseHistory)
+                        setResponses([])
+                        setMessages([
+                            ...currentMessages, 
+                            {
+                                user: true,
+                                message: value
+                            }
+                        ])
+                        setNextMessage(response.next)
+                    }
+
+                    responseMessages.push(
+                        <ConvoInput
+                            type={response.input}
+                            initialValue={response.input === 'string' ? "" : 0}
+                            onComplete={handleSubmit}
+                        />
+                    )
                     continue
                 }
             }
@@ -107,8 +129,8 @@ const Conversation: FC = () => {
             switch (flag) {
                 case 'BANK_NOT_LINKED':
                     // TODO: add endpoint to determine if linked
-                    if (true) {
-                        upcomingMessage = message.flags[flag].next
+                    if (false) {
+                        // upcomingMessage = message.flags[flag].next
                     }
                     break;
             }

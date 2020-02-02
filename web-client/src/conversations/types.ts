@@ -16,7 +16,7 @@ export interface ConversationMessage {
     error?: number;
     responses?: {
         message?: string;
-        input?: string;
+        input?: 'string' | 'number';
         id?: ResponseIds;
         next: number;
     }[],
