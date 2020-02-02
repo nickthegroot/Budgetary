@@ -5,25 +5,29 @@ const BubbleWrapper = styled.div<BubbleProps>`
 display:inline-block;
 padding:15px 15px 15px 15px;
 border-radius: 6px;
-float: right;
-margin-right: 40px;
+margin-right: 30px;
+margin-left: 30px;
 color:black;
-background-color:#e7ebf2;
 position: relative;
   
-  ${props => props.propFor === "user" ? `&:after {
+  ${props => props.user ? `
+  background-color: #409af8;
+  color: white;
+  &:after {
     content: "";
     position:absolute;
     margin-top:-6px;
     margin-left:-5px;
     border-left: 12px solid transparent;
     border-right: 12px solid transparent;
-    border-bottom: 12px solid #e7ebf2;
+    border-bottom: 12px solid #409af8;
     transform:rotate(-45deg);
     right: -15px; 
     top: 10px;
   }`:
-  `&:before {
+  `
+  background-color: #e7ebf2;
+  &:before {
     content: "";
     position:absolute;
     margin-top:-6px;
@@ -50,12 +54,7 @@ position: relative;
     }
     `}
 
-animation: myfirst 2s;
-animation-direction: alternate-reverse;
-}
-@keyframes myfirst {
-0%   { left: 0px; top: 0px;}
-100%  { left: 0px; top: 500px;}
+
 
 }`;
 
